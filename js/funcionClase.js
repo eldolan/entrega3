@@ -61,6 +61,7 @@ function actualizarCalendarioConEvento(evento) {
     actualizarMenuPruebas();
 }
 
+
 // Función para agregar un evento al calendario
 function agregarEvento(nombre, fecha, color) {
     const nuevoEvento = new Evento(nombre, fecha, color);
