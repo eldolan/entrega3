@@ -2,137 +2,73 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Calendario de Pruebas</title>
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .calendario { display: flex; justify-content: space-between; padding: 0; list-style-type: none; }
-        .mes { flex: 1; }
-    </style>
+    <title>Registro de Notas</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
-
-<!-- Barra de navegación si es necesaria -->
-<nav class="navbar navbar-expand-lg p-4 navbar-light bg-light">
-    <a class="navbar-brand" href="#">Mi Calendario de Pruebas</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo" aria-controls="navbarTogglerDemo" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo">
-    </div>
-    <div class="ms-auto">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAgregarClase">
-            Añadir Clase/Examen
-        </button>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNotas">
-            Ingresar Notas
-        </button>
-    </div>
-</nav>
-
-<!-- Contenedor del Calendario -->
-<ul class="calendario">
-    <li class="mes" id="enero">Enero</li>
-    <li class="mes" id="febrero">Febrero</li>
-    <li class="mes" id="marzo">Marzo</li>
-    <li class="mes" id="abril">Abril</li>
-    <li class="mes" id="mayo">Mayo</li>
-    <li class="mes" id="junio">Junio</li>
-    <li class="mes" id="julio">Julio</li>
-    <li class="mes" id="agosto">Agosto</li>
-    <li class="mes" id="septiembre">Septiembre</li>
-    <li class="mes" id="octubre">Octubre</li>
-    <li class="mes" id="noviembre">Noviembre</li>
-    <li class="mes" id="diciembre">Diciembre</li>
-</ul>
-
-<!-- Modal para agregar eventos -->
-<div class="modal fade" id="modalAgregarClase" tabindex="-1" aria-labelledby="modalAgregarClaseLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalAgregarClaseLabel">Agregar Clase/Examen</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="formularioEvento">
-                    <div class="form-group mt-2">
-                        <label for="nombreEvento">Nombre de la clase/examen</label>
-                        <input type="text" class="form-control mt-2 " id="nombreEvento" required>
-                    </div>
-                    <div class="form-group mt-2">
-                        <label for="fechaEvento">Fecha del examen</label>
-                        <input type="date" class="form-control mt-2 " id="fechaEvento" required>
-                    </div>
-                    <div class="form-group mt-2">
-                        <label for="colorEvento">Color para la clase/examen</label>
-                        <input type="color" class="form-control mt-2" id="colorEvento" value="#ff0000">
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" id="checkExamenFinal">
-                        <label class="form-check-label" for="checkExamenFinal">
-                            Es examen final
-                        </label>
-                    </div>
-                    <button type="submit" class="btn mt-3 btn-primary">Agregar Evento</button>
-                </form>
-            </div>
+<div class="container py-5">
+    <h1 class="text-center mb-4">Registro de Notas</h1>
+    <form id="configuracion" class="row g-3 justify-content-center">
+        <div class="col-md-4">
+            <label for="minima"></label><input type="number" class="form-control" id="minima" placeholder="Nota mínima" required>
         </div>
-    </div>
+        <div class="col-md-4">
+            <label for="maxima"></label><input type="number" class="form-control" id="maxima" placeholder="Nota máxima" required>
+        </div>
+        <div class="col-md-4">
+            <label for="aprobacion"></label><input type="number" class="form-control" id="aprobacion" placeholder="Nota de aprobación" required>
+        </div>
+        <div class="col-md-4">
+            <label for="cantidadNotas"></label><input type="number" class="form-control" id="cantidadNotas" placeholder="Cantidad de notas" required>
+        </div>
+        <div class="col-12 text-center">
+            <button type="submit" class="btn btn-primary">Configurar</button>
+        </div>
+    </form>
+
+    <div id="notasContainer" class="mt-4"></div>
+
+    <div id="resultado" class="mt-3 text-center"></div>
 </div>
 
-<div class="modal fade" id="modalNotas" tabindex="-1" aria-labelledby="modalNotasLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalNotasLabel">Agregar Nota</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="formularioNotas">
-                    <div class="form-group">
-                        <label for="notaMinima">Nota Mínima</label>
-                        <input type="number" class="form-control" id="notaMinima" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="notaMaxima">Nota Máxima</label>
-                        <input type="number" class="form-control" id="notaMaxima" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="notaAprobacion">Nota Mínima para Aprobar</label>
-                        <input type="number" class="form-control" id="notaAprobacion" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="valorNota">Valor de la Nota</label>
-                        <input type="number" class="form-control" id="valorNota" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="porcentajeNota">Porcentaje de la Nota</label>
-                        <input type="number" class="form-control" id="porcentajeNota" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="pruebaSeleccionada">Seleccionar Prueba</label>
-                        <select class="form-control" id="pruebaSeleccionada">
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Agregar Nota</button>
-                </form>
-            </div>
-        </div>
+<div class="container py-3">
+    <h2 class="text-center mb-4">Calendario de Evaluaciones</h2>
+    <div class="d-flex justify-content-center align-items-center mt-4">
+        <label for="seleccionRamo"></label><select id="seleccionRamo" class="form-select" onchange="mostrarCalendarioSeleccionado()">
+            <option value="">Selecciona un ramo...</option>
+        </select>
+        <button id="eliminarRamo" class="btn btn-danger ms-2 text-nowrap" style="display:none;">Eliminar Ramo</button>
     </div>
+
+    <form id="configuracionCalendario" class="row g-3 justify-content-center">
+        <div class="col-md-4">
+            <label for="nombreRamo" class="form-label">Nombre del Ramo</label>
+            <input type="text" class="form-control" id="nombreRamo" required>
+        </div>
+        <div class="col-md-4">
+            <label for="cantidadEvaluaciones" class="form-label">Cantidad de Evaluaciones</label>
+            <input type="number" class="form-control" id="cantidadEvaluaciones">
+        </div>
+        <div class="col-md-4">
+            <label for="fechaExamenFinal" class="form-label">Fecha del Examen Final</label>
+            <input type="date" class="form-control" id="fechaExamenFinal" required>
+        </div>
+        <div class="col-12 text-center">
+            <button type="submit" class="btn btn-primary">Crear Calendario</button>
+        </div>
+    </form>
+
+    <div id="fechasEvaluacionesContainer" class="mt-4" style="display: none;"></div>
+    <div id="formularioEdicion" class="mt-3" style="display:none;">
+        <label for="fechaEdicion"></label><input type="date" id="fechaEdicion" class="form-control">
+        <button onclick="guardarFechaEditada()" class="btn btn-success mt-2">Guardar Cambio</button>
+    </div>
+
 </div>
 
 
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="/js/bootstrap.bundle.min.js"></script>
-<script src="/js/funcionClase.js"></script>
-<script src="/js/funcionNotas.js"></script>
-
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/funcion.js"></script>
+<script src="js/calendario.js"></script>
 </body>
 </html>
