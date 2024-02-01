@@ -18,15 +18,10 @@
         <div class="col-md-4">
             <label for="aprobacion"></label><input type="number" class="form-control" id="aprobacion" placeholder="Nota de aprobación" required>
         </div>
-        <div class="col-md-4">
-            <label for="cantidadNotas"></label><input type="number" class="form-control" id="cantidadNotas" placeholder="Cantidad de notas" required>
-        </div>
         <div class="col-12 text-center">
             <button type="submit" class="btn btn-primary">Configurar</button>
         </div>
     </form>
-
-    <div id="notasContainer" class="mt-4"></div>
 
     <div id="resultado" class="mt-3 text-center"></div>
 </div>
@@ -58,7 +53,9 @@
         </div>
     </form>
 
+
     <div id="fechasEvaluacionesContainer" class="mt-4" style="display: none;"></div>
+
     <div id="formularioEdicion" class="mt-3" style="display:none;">
         <label for="fechaEdicion"></label><input type="date" id="fechaEdicion" class="form-control">
         <button onclick="guardarFechaEditada()" class="btn btn-success mt-2">Guardar Cambio</button>

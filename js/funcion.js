@@ -75,32 +75,10 @@ document.getElementById('configuracion').addEventListener('submit', function (ev
     const minima = parseFloat(document.getElementById('minima').value);
     const maxima = parseFloat(document.getElementById('maxima').value);
     const aprobacion = parseFloat(document.getElementById('aprobacion').value);
-    cantidadNotas = parseInt(document.getElementById('cantidadNotas').value);
 
     registro = new RegistroDeNotas(minima, maxima, aprobacion);
-    cantidadNotas = parseInt(document.getElementById('cantidadNotas').value);
-    mostrarFormulariosNotas(cantidadNotas);
 });
 
-function mostrarFormulariosNotas(cantidad) {
-    let notasContainer = document.getElementById('notasContainer');
-    notasContainer.innerHTML = '';
-    for (let i = 0; i < cantidad; i++) {
-        notasContainer.innerHTML += `
-            <div class="row g-3 mb-2">
-                <div class="col-md-6">
-                    <label for="valorNota${i}" class="form-label">Valor de la nota ${i + 1}</label>
-                    <input type="number" class="form-control valorNota" id="valorNota${i}" required>
-                </div>
-                <div class="col-md-6">
-                    <label for="porcentajeNota${i}" class="form-label">Porcentaje de la nota ${i + 1}</label>
-                    <input type="number" class="form-control porcentajeNota" id="porcentajeNota${i}" required>
-                </div>
-            </div>`;
-    }
-    notasContainer.innerHTML += `<div class="text-center"><button type="button" class="btn btn-primary" onclick="agregarNotas()">Agregar Notas</button></div>`;
-    notasContainer.style.display = 'block';
-}
 
 function agregarNotas() {
     let valoresNotas = document.querySelectorAll('.valorNota');
