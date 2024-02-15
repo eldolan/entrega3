@@ -1,0 +1,7 @@
+Arreglar modal editar nota, funciona bien 1 vez luego no deja editar además de no diferenciar las evaluaciones al
+momento de cargar
+
+El programa no puede diferenciar el orden de las evaluaciones, falta reestructurar todo el metodo de guardado
+respecto a las fechas de evaluaciones
+
+Falta integrar calculo respecto a cuanto se necesita para el examen final y si es posible lograrlo.

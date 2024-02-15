@@ -6,36 +6,21 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="container py-5">
-    <h1 class="text-center mb-4">Registro de Notas</h1>
-    <form id="configuracion" class="row g-3 justify-content-center">
-        <div class="col-md-4">
-            <label for="minima"></label><input type="number" class="form-control" id="minima" placeholder="Nota mínima" required>
-        </div>
-        <div class="col-md-4">
-            <label for="maxima"></label><input type="number" class="form-control" id="maxima" placeholder="Nota máxima" required>
-        </div>
-        <div class="col-md-4">
-            <label for="aprobacion"></label><input type="number" class="form-control" id="aprobacion" placeholder="Nota de aprobación" required>
-        </div>
-        <div class="col-12 text-center">
-            <button type="submit" class="btn btn-primary">Configurar</button>
-        </div>
-    </form>
-
-    <div id="resultado" class="mt-3 text-center"></div>
-</div>
-
 <div class="container py-3">
-    <h2 class="text-center mb-4">Calendario de Evaluaciones</h2>
-    <div class="d-flex justify-content-center align-items-center mt-4">
+    <h2 class="text-center my-4">Calendario de Evaluaciones</h2>
+    <div class="d-flex justify-content-center align-items-center my-4">
         <label for="seleccionRamo"></label><select id="seleccionRamo" class="form-select" onchange="mostrarCalendarioSeleccionado()">
             <option value="">Selecciona un ramo...</option>
         </select>
         <button id="eliminarRamo" class="btn btn-danger ms-2 text-nowrap" style="display:none;">Eliminar Ramo</button>
     </div>
 
-    <form id="configuracionCalendario" class="row g-3 justify-content-center">
+    <button class="btn btn-secondary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#configuracionCalendario"
+            aria-expanded="false" aria-controls="configuracionCalendario">
+        Configurar Calendario
+    </button>
+
+    <form id="configuracionCalendario" class="row g-3 justify-content-center collapse">
         <div class="col-md-4">
             <label for="nombreRamo" class="form-label">Nombre del Ramo</label>
             <input type="text" class="form-control" id="nombreRamo" required>
@@ -47,6 +32,18 @@
         <div class="col-md-4">
             <label for="fechaExamenFinal" class="form-label">Fecha del Examen Final</label>
             <input type="date" class="form-control" id="fechaExamenFinal" required>
+        </div>
+        <div class="col-md-4">
+            <label for="notaMinima" class="form-label">Nota Minima</label>
+            <input type="number" class="form-control" id="notaMinima" required>
+        </div>
+        <div class="col-md-4">
+            <label for="notaMaxima" class="form-label">Nota Maxima</label>
+            <input type="number" class="form-control" id="notaMaxima" required>
+        </div>
+        <div class="col-md-4">
+            <label for="notaAprobacion" class="form-label">Nota Aprobacion</label>
+            <input type="number" class="form-control" id="notaAprobacion" required>
         </div>
         <div class="col-12 text-center">
             <button type="submit" class="btn btn-primary">Crear Calendario</button>
@@ -61,11 +58,78 @@
         <button onclick="guardarFechaEditada()" class="btn btn-success mt-2">Guardar Cambio</button>
     </div>
 
+    <div id="infoRamoAlert" class="mt-4" style="display: none;" role="alert">
+    </div>
+
+    <div class="modal fade" id="modalEditarNotas" tabindex="-1" aria-labelledby="modalEditarNotasLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEditarNotasLabel">Editar Notas del Ramo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Campos de formulario para editar notas -->
+                    <form id="formularioEditarNotas">
+                        <div class="mb-3">
+                            <label for="editarNotaMinima" class="form-label">Nota Mínima</label>
+                            <input type="number" class="form-control" id="editarNotaMinima">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editarNotaMaxima" class="form-label">Nota Máxima</label>
+                            <input type="number" class="form-control" id="editarNotaMaxima">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editarNotaAprobacion" class="form-label">Nota de Aprobación</label>
+                            <input type="number" class="form-control" id="editarNotaAprobacion">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="guardarCambiosNotas">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Agregar Nota -->
+    <div class="modal fade" id="modalAgregarNota" tabindex="-1" aria-labelledby="modalAgregarNotaLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAgregarNotaLabel">Agregar Nota</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formularioNota">
+                        <div class="mb-3">
+                            <label for="valorNota" class="form-label">Valor de la nota</label>
+                            <input type="number" class="form-control" id="valorNota">
+                        </div>
+                        <div class="mb-3">
+                            <label for="porcentajeNota" class="form-label">Porcentaje de la nota</label>
+                            <input type="number" class="form-control" id="porcentajeNota">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="botonGuardarNota">Guardar Nota</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 
 
 <script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/funcion.js"></script>
-<script src="js/calendario.js"></script>
+<script src="js/modelosDatos.js"></script>
+<script src="js/gestionEstado.js"></script>
+<script src="js/funcionesDOM.js"></script>
+<script src="js/logicaAplicacion.js"></script>
+<script src="js/iniciaEventos.js"></script>
 </body>
 </html>
